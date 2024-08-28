@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='images/favicon.ico') }}" rel="icon" type="image/x-icon">
+    <title>Consulta - Listado de Trabajadores</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/quintomolinos.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+        }
+        h1, h2, label, th, td {
+            color: #ffffff;
+        }
+        th, td {
+            white-space: nowrap;
+            padding: 10px;
+            text-align: left;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo-container img {
+            max-width: 100px; /* Puedes ajustar el tamaño según necesites */
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            </a>
+        </div>
+    <div class="container my-5">
+        <h1>Listado de Trabajadores</h1>
+        <!-- Mostrar mensajes de flash -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-warning">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>N° ESTAMPA</th>
+                    <th>RUT</th>
+                    <th>N</th>
+                    <th>Nombre</th>
+                    <th>Turno</th>
+                    <th>Cargo</th>
+                    <th>Alcance</th>
+                    <th>Estampa</th>
+                    <th>Fecha de Calificación</th>
+                    <th>Informe de Laboratorio</th>
+                    <th>Estado de Pago CESMEC</th>
+                    <th>Habilitado para Soldar</th>
+                    <th>Rango de Diámetros o Espesores</th>
+                    <th>WPQ AVA</th>
+                    <th>Posición Calificada</th>
+                    <th>Material Base</th>
+                    <th>Aporte</th>
+                    <th>Proceso</th>
+                    <th>Norma</th>
+                    <th>WPS</th>
+                    <th>PQR</th>
+                    <th>Estatus</th>
+                    <th>Contratado/Finiquitado o No Habilitado</th>
+                    <th>Observaciones</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for trabajador in trabajadores %}
+                    <tr>
+                        <td>{{ trabajador.NUMERO_ESTAMPA }}</td>
+                        <td>{{ trabajador.RUT }}</td>
+                        <td>{{ trabajador.N }}</td>
+                        <td>{{ trabajador.NOMBRE }}</td>
+                        <td>{{ trabajador.TURNO }}</td>
+                        <td>{{ trabajador.CARGO }}</td>
+                        <td>{{ trabajador.ALCANCE }}</td>
+                        <td>{{ trabajador.ESTAMPA }}</td>
+                        <td>{{ trabajador.FECHA_CALIFICACION }}</td>
+                        <td>{{ trabajador.INFORME_LABORATORIO }}</td>
+                        <td>{{ trabajador.ESTADO_DE_PAGO_CESMEC }}</td>
+                        <td>{{ trabajador.HABILITADO_PARA_SOLDAR }}</td>
+                        <td>{{ trabajador.RANGO_DE_DIAMETROS_O_ESPESORES }}</td>
+                        <td>{{ trabajador.WPQ_AVA }}</td>
+                        <td>{{ trabajador.POSICION_CALIFICADA }}</td>
+                        <td>{{ trabajador.MATERIAL_BASE }}</td>
+                        <td>{{ trabajador.Aporte }}</td>
+                        <td>{{ trabajador.PROCESO }}</td>
+                        <td>{{ trabajador.NORMA }}</td>
+                        <td>{{ trabajador.WPS }}</td>
+                        <td>{{ trabajador.PQR }}</td>
+                        <td>{{ trabajador.ESTATUS }}</td>
+                        <td>{{ trabajador.CONTRATADO_FINIQUITADO_O_NO_HABILITADO }}</td>
+                        <td>{{ trabajador.OBSERVACIONES }}</td>
+                        <td>
+                            <a href="{{ url_for('editar', n=trabajador.N) }}" class="btn btn-warning btn-sm">Editar</a>
+                            <form action="{{ url_for('eliminar', n=trabajador.N) }}" method="post" style="display:inline;">
+                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Estás seguro de que quieres eliminar este registro?');">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="{{ url_for('index') }}" class="btn btn-primary">Volver al inicio</a>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

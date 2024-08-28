@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static', filename='images/favicon.ico') }}" rel="icon" type="image/x-icon">
+    <title>Consulta - Agregar Trabajador</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-image: url("{{ url_for('static', filename='images/inicioquinto.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #fff;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1, h2, label, th, td { /* Aplica el color claro a todos estos elementos */
+            color: #ffffff;
+        }
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .logo-container img {
+            max-width: 100px; /* Puedes ajustar el tamaño según necesites */
+        }
+    </style>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo">
+            </a>
+        </div>
+        <div class="container my-5">
+            <h1>Listado de Trabajadores</h1>
+        <!-- Mostrar mensajes de flash -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="alert alert-warning">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('agregar') }}" method="post">
+            <div class="form-group">
+                <label for="NUMERO_ESTAMPA">N° ESTAMPA</label>
+                <input type="text" id="NUMERO_ESTAMPA" name="NUMERO_ESTAMPA" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="RUT">RUT</label>
+                <input type="text" id="RUT" name="RUT" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="NOMBRE">Nombre</label>
+                <input type="text" id="NOMBRE" name="NOMBRE" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="TURNO">Turno</label>
+                <input type="text" id="TURNO" name="TURNO" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="CARGO">Cargo</label>
+                <input type="text" id="CARGO" name="CARGO" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="ALCANCE">Alcance</label>
+                <input type="text" id="ALCANCE" name="ALCANCE" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="ESTAMPA">Estampa</label>
+                <input type="text" id="ESTAMPA" name="ESTAMPA" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="FECHA_CALIFICACION">Fecha de Calificación</label>
+                <input type="date" id="FECHA_CALIFICACION" name="FECHA_CALIFICACION" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="INFORME_LABORATORIO">Informe de Laboratorio</label>
+                <input type="text" id="INFORME_LABORATORIO" name="INFORME_LABORATORIO" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="ESTADO_DE_PAGO_CESMEC">Estado de Pago CESMEC</label>
+                <input type="text" id="ESTADO_DE_PAGO_CESMEC" name="ESTADO_DE_PAGO_CESMEC" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="HABILITADO_PARA_SOLDAR">Habilitado para Soldar</label>
+                <input type="text" id="HABILITADO_PARA_SOLDAR" name="HABILITADO_PARA_SOLDAR" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="RANGO_DE_DIAMETROS_O_ESPESORES">Rango de Diámetros o Espesores</label>
+                <input type="text" id="RANGO_DE_DIAMETROS_O_ESPESORES" name="RANGO_DE_DIAMETROS_O_ESPESORES" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="WPQ_AVA">WPQ AVA</label>
+                <input type="text" id="WPQ_AVA" name="WPQ_AVA" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="POSICION_CALIFICADA">Posición Calificada</label>
+                <input type="text" id="POSICION_CALIFICADA" name="POSICION_CALIFICADA" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="MATERIAL_BASE">Material Base</label>
+                <input type="text" id="MATERIAL_BASE" name="MATERIAL_BASE" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="Aporte">Aporte</label>
+                <input type="text" id="Aporte" name="Aporte" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="PROCESO">Proceso</label>
+                <input type="text" id="PROCESO" name="PROCESO" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="NORMA">Norma</label>
+                <input type="text" id="NORMA" name="NORMA" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="WPS">WPS</label>
+                <input type="text" id="WPS" name="WPS" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="PQR">PQR</label>
+                <input type="text" id="PQR" name="PQR" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="ESTATUS">Estatus</label>
+                <input type="text" id="ESTATUS" name="ESTATUS" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="CONTRATADO_FINIQUITADO_O_NO_HABILITADO">Contratado/Finiquitado o No Habilitado</label>
+                <input type="text" id="CONTRATADO_FINIQUITADO_O_NO_HABILITADO" name="CONTRATADO_FINIQUITADO_O_NO_HABILITADO" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="OBSERVACIONES">Observaciones</label>
+                <textarea id="OBSERVACIONES" name="OBSERVACIONES" class="form-control"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Agregar Trabajador</button>
+        </form>
+        <a href="{{ url_for('index') }}" class="btn btn-primary mt-3">Volver al inicio</a>
+        <a href="{{ url_for('trabajadores') }}" class="btn btn-secondary mt-3">Volver al listado</a>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
